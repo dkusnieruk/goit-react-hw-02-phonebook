@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import propTypes from 'prop-types';
-import MyForm from './MyForm/MyForm';
 import Formix from './Formix/Formix';
 class App extends Component {
   
