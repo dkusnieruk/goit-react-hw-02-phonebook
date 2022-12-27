@@ -1,16 +1,21 @@
-export const App = () => {
-  return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template createa element
-    </div>
-  );
+import { Component } from 'react';
+import propTypes from 'prop-types';
+import MyForm from './MyForm/MyForm';
+import Formix from './Formix/Formix';
+class App extends Component {
+  
+  render() {
+    return (
+      <>
+        <Formix title="PhoneBook" />
+      </>
+    );
+  }
+}
+
+App.propTypes = {
+  contacts: propTypes.object,
+  name: propTypes.string,
 };
+
+export default App;
