@@ -1,20 +1,15 @@
 import { Component } from 'react';
-import propTypes from 'prop-types';
-import Formix from './Formix/Formix';
+import PhoneBook from './PhoneBook/PhoneBook';
 class App extends Component {
   
   render() {
     return (
       <>
-        <Formix title="PhoneBook" />
+       <PhoneBook/>
       </>
     );
   }
 }
 
-App.propTypes = {
-  contacts: propTypes.object,
-  name: propTypes.string,
-};
 
 export default App;
