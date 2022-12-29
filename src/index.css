@@ -14,8 +14,3 @@ code {
     monospace;
 }
 
-span{
-  display:flex;
-  color:red;
-  width: 250px;
-}

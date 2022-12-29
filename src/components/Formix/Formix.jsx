@@ -1,5 +1,6 @@
 import { Formik, Form, Field, ErrorMessage,FieldArray} from "formik"
 import css from '../MyForm/MyForm.module.css'
+import { nanoid } from "nanoid"
 const  initialValues= {
     contacts:[] ,
     name: '',
@@ -97,7 +98,6 @@ function Formix () {
                 contacts.map((contact, index)=>(
                     
                 <div key={index}>
-                    
                     <Field className={css.nameInput} name={`contacts[${index}].name`}/>
                     <Field className={css.numberInput} name={`contacts[${index}].number`}/>
                     <button className={css.removeButton} type='button' onClick={()=>remove(index)}>X</button>
