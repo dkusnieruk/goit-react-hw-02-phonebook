@@ -5,7 +5,8 @@ class App extends Component {
   render() {
     return (
       <>
-       <PhoneBook title='PhoneBook App' onSubmit={values => console.log(values)}/>
+       <PhoneBook title='PhoneBook App' 
+       formSubmissionHandler={(data)=>{console.log(data);}}/>
       </>
     );
   }
