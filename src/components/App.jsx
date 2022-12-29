@@ -5,7 +5,7 @@ class App extends Component {
   render() {
     return (
       <>
-       <PhoneBook/>
+       <PhoneBook title='PhoneBook App' onSubmit={values => console.log(values)}/>
       </>
     );
   }
