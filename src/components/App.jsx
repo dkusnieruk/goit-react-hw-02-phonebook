@@ -5,6 +5,7 @@ class App extends Component {
   render() {
     return (
       <>
+      <div>Króliki</div>
        <PhoneBook title='PhoneBook App' onSubmit={values => console.log(values)}/>
       </>
     );
