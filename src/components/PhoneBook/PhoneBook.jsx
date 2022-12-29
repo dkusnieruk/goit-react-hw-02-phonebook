@@ -64,11 +64,14 @@ class PhoneBook extends Component {
                           return  contactType.includes(searchType)
                             
                         }).map((contact, index)=>{
-                            if(this.state.search){
+                            if(this.state.search)
+                            {
                             return(
                                 <li key={index}>{contact.name}:  {contact.number}</li>
                             )
-                        }
+                        } else 
+                        {
+                            return null}
                     })
                     }
                 </ul>            
