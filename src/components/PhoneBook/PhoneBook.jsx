@@ -117,7 +117,7 @@ class PhoneBook extends Component {
               return contactType.includes(searchType);
             })
             .map((contact, index) => {
-              if (this.state.search) {
+              if (!this.state.search) {
                 return (
                   <li className={css.singleItem} key={index}>
                     {contact.name}: {contact.number}
@@ -132,7 +132,19 @@ class PhoneBook extends Component {
                   </li>
                 );
               } else {
-                return null;
+                return (
+                  <li className={css.singleItem} key={index}>
+                    {contact.name}: {contact.number}
+                    <button
+                      className={css.removeButton}
+                      type="button"
+                      id={contact.id}
+                      onClick={() => this.handleRemove(contact.id)}
+                    >
+                      X
+                    </button>
+                  </li>
+                );
               }
             })}
         </ul>
