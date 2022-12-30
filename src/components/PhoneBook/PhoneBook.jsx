@@ -15,6 +15,18 @@ class PhoneBook extends Component {
         number:"",
         search:""     }
 
+
+      handleRemove(id){
+        const newList =this.state.contacts.filter((item)=>
+        item.id !==id
+        );
+        console.log(newList);
+        this.setState({
+            contacts: newList
+        })
+        
+      }  
+
       handleInputChange =(event)=>{
         const {value, name} =event.target
         this.setState({
@@ -32,7 +44,20 @@ class PhoneBook extends Component {
             number:'',
             
         })
+        
+        const checkArray = this.state.contacts.filter(contact =>{
+            const filterArray = contact.name.toLowerCase();
+            const filterName = this.state.name.toLowerCase();
 
+            if (filterArray.includes(filterName)){
+            return true }
+            else return false
+        })
+        console.log(checkArray);
+        if(checkArray.length > 0){
+            alert(`Masz już kontakt o imieniu : ${this.state.name}`)
+        }
+        else 
         this.state.contacts.push(object)
     }
 
@@ -67,11 +92,14 @@ class PhoneBook extends Component {
                             if(this.state.search)
                             {
                             return(
+                                
                                 <li key={index}>{contact.name}:  {contact.number}</li>
+                                
                             )
                         } else 
                         {
-                            return null}
+                            return null
+                        }
                     })
                     }
                 </ul>            
@@ -107,7 +135,17 @@ class PhoneBook extends Component {
                     
                     this.state.contacts.map((contact, index)=>{
                 return (
-                    <li key={index}>{contact.name} :  {contact.number}</li>
+                    <li 
+                    className={css.singleItem}
+                    key={index} id={contact.id}>{contact.name} :  {contact.number}
+                    <button
+                    className={css.removeButton}
+                    type="button"
+                    id={contact.id}
+                    onClick={()=>this.handleRemove(contact.id)}
+                    >X</button>
+                    </li>
+                    
                 )
                     })
                 }
