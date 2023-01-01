@@ -1,17 +1,12 @@
-import { Component } from "react";
-import css from '../ContactForm/contactForm.module.css'
+import { Component } from 'react';
+import css from '../ContactForm/contactForm.module.css';
+import propTypes from 'prop-types';
 class ContactForm extends Component {
- 
-render(){
-    
-    return(
-        <>
-                <form 
-                className={css.form} 
-                onSubmit={this.props.onSubmit}>
-          <label 
-          className={css.label}
-          >
+  render() {
+    return (
+      <>
+        <form className={css.form} onSubmit={this.props.onSubmit}>
+          <label className={css.label}>
             Name
             <input
               className={css.input}
@@ -25,9 +20,7 @@ render(){
               required
             />
           </label>
-          <label 
-          className={css.label}
-          >
+          <label className={css.label}>
             {' '}
             Number
             <input
@@ -42,15 +35,17 @@ render(){
               required
             />
           </label>
-          <button 
-          className={css.button} 
-          type="submit">
+          <button className={css.button} type="submit">
             Add Contact
           </button>
-          </form>
-        </>
-    )
-}    
+        </form>
+      </>
+    );
+  }
 }
+ContactForm.propTypes = {
+  name: propTypes.string,
+  number: propTypes.number,
+};
 
-export default ContactForm
+export default ContactForm;

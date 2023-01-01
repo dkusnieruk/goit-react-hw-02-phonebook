@@ -3,9 +3,8 @@ import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
 import { nanoid } from 'nanoid';
 import ContactList from './ContactList/ContactList';
-// import PhoneBook from './PhoneBook/PhoneBook';
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       contacts: [
@@ -14,26 +13,24 @@ class App extends Component {
         { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
         { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
       ],
-      name: '',
-      number: '',
       search: '',
     };
   }
 
-  handleRemove= (id)=> {
+  handleRemove = id => {
     const newList = this.state.contacts.filter(item => item.id !== id);
-    
+
     this.setState({
       contacts: newList,
     });
-  }
+  };
 
   handleInputChange = event => {
     const { value, name } = event.target;
     this.setState({
       [name]: value,
     });
-  }
+  };
 
   handleSubmit = event => {
     event.preventDefault();
@@ -62,23 +59,39 @@ class App extends Component {
       alert(`Masz już kontakt o imieniu : ${this.state.name}`);
     } else this.state.contacts.push(object);
   };
+  handleSearch = () => {
+    this.props.contacts.filter(contact => {
+      const searchType = this.props.search.toLowerCase();
+      const contactType = contact.name.toLowerCase();
 
-
+      return contactType.includes(searchType);
+    });
+  };
 
   render() {
-    const {contacts , name , search , number} = this.state
-    
+    const { contacts, name, search, number } = this.state;
+
     return (
       <>
-      <ContactForm contacts={contacts} name={name} search={search} number={number} onSubmit={this.handleSubmit} onChange={this.handleInputChange} />
-      <Filter search={search}/>
-      <ContactList contacts={contacts} search={search} name={name} handleRemove={this.handleRemove} />
-        {/* <PhoneBook
-          title="PhoneBook App"
-          formSubmissionHandler={data => {
-            console.log(data);
-          }}
-        /> */}
+        <ContactForm
+          contacts={contacts}
+          name={name}
+          search={search}
+          number={number}
+          onSubmit={this.handleSubmit}
+          onChange={this.handleInputChange}
+        />
+        <Filter
+          search={search}
+          handleSearch={this.handleSearch}
+          handleChange={this.handleInputChange}
+        />
+        <ContactList
+          contacts={contacts}
+          search={search}
+          name={name}
+          handleRemove={this.handleRemove}
+        />
       </>
     );
   }
