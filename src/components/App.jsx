@@ -76,9 +76,7 @@ class App extends Component {
     return (
       <>
         <ContactForm
-          contacts={contacts}
           name={name}
-          filtrer={filter}
           number={number}
           onSubmit={this.handleSubmit}
           onChange={this.handleInputChange}
