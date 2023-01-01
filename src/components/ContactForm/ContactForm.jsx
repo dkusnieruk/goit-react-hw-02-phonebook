@@ -21,7 +21,6 @@ class ContactForm extends Component {
             />
           </label>
           <label className={css.label}>
-            {' '}
             Number
             <input
               className={css.input}
@@ -45,7 +44,7 @@ class ContactForm extends Component {
 }
 ContactForm.propTypes = {
   name: propTypes.string,
-  number: propTypes.number,
+  number: propTypes.string,
 };
 
 export default ContactForm;

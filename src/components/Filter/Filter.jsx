@@ -4,7 +4,6 @@ import propTypes from 'prop-types';
 
 class Filter extends Component {
   render() {
-    console.log(this.props);
     return (
       <>
         <label className={css.label}>
@@ -12,8 +11,8 @@ class Filter extends Component {
           <input
             className={css.input}
             type="search"
-            name="search"
-            value={this.props.search}
+            name="filter"
+            value={this.props.filter}
             onChange={this.props.handleChange}
           ></input>
         </label>
@@ -23,7 +22,7 @@ class Filter extends Component {
 }
 
 Filter.propTypes = {
-  search: propTypes.string,
+  filter: propTypes.string,
 };
 
 export default Filter;

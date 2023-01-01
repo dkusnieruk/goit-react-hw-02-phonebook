@@ -3,6 +3,8 @@ import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
 import { nanoid } from 'nanoid';
 import ContactList from './ContactList/ContactList';
+import propTypes from 'prop-types';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +15,7 @@ class App extends Component {
         { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
         { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
       ],
-      search: '',
+      filter: '',
     };
   }
 
@@ -34,13 +36,13 @@ class App extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log(this.state);
+
     const object = {
-      id: nanoid(5),
+      id: nanoid(),
       name: this.state.name,
       number: this.state.number,
     };
-    console.log(object);
+
     this.setState({
       name: '',
       number: '',
@@ -54,14 +56,14 @@ class App extends Component {
         return true;
       } else return false;
     });
-    console.log(checkArray);
+
     if (checkArray.length > 0) {
       alert(`Masz już kontakt o imieniu : ${this.state.name}`);
     } else this.state.contacts.push(object);
   };
   handleSearch = () => {
     this.props.contacts.filter(contact => {
-      const searchType = this.props.search.toLowerCase();
+      const searchType = this.props.filter.toLowerCase();
       const contactType = contact.name.toLowerCase();
 
       return contactType.includes(searchType);
@@ -69,26 +71,26 @@ class App extends Component {
   };
 
   render() {
-    const { contacts, name, search, number } = this.state;
+    const { contacts, name, filter, number } = this.state;
 
     return (
       <>
         <ContactForm
           contacts={contacts}
           name={name}
-          search={search}
+          filtrer={filter}
           number={number}
           onSubmit={this.handleSubmit}
           onChange={this.handleInputChange}
         />
         <Filter
-          search={search}
+          filter={filter}
           handleSearch={this.handleSearch}
           handleChange={this.handleInputChange}
         />
         <ContactList
           contacts={contacts}
-          search={search}
+          filter={filter}
           name={name}
           handleRemove={this.handleRemove}
         />
@@ -96,5 +98,10 @@ class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  contacts: propTypes.object,
+  filter: propTypes.string,
+};
 
 export default App;

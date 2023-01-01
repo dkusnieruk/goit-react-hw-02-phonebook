@@ -7,13 +7,13 @@ class ContactList extends Component {
       <ul className={css.listMain}>
         {this.props.contacts
           .filter(contact => {
-            const searchType = this.props.search.toLowerCase();
+            const searchType = this.props.filter.toLowerCase();
             const contactType = contact.name.toLowerCase();
 
             return contactType.includes(searchType);
           })
           .map((contact, index) => {
-            if (!this.props.search) {
+            if (!this.props.filter) {
               return (
                 <li className={css.singleItem} key={index}>
                   {contact.name}: {contact.number}
@@ -51,7 +51,7 @@ class ContactList extends Component {
 ContactList.propTypes = {
   name: propTypes.string,
   number: propTypes.number,
-  contacts: propTypes.object,
-  search: propTypes.string,
+  contacts: propTypes.array,
+  filter: propTypes.string,
 };
 export default ContactList;
