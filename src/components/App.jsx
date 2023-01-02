@@ -3,11 +3,11 @@ import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
 import { nanoid } from 'nanoid';
 import ContactList from './ContactList/ContactList';
-import propTypes from 'prop-types';
+
 
 class App extends Component {
   constructor(props) {
-    super(props);
+    super();
     this.state = {
       contacts: [
         { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -36,18 +36,18 @@ class App extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-
     const object = {
       id: nanoid(),
-      name: this.state.name,
-      number: this.state.number,
+      name: event.target.elements.name.value ,
+      number: event.target.elements.number.value ,
     };
-
+   
     this.setState({
       name: '',
       number: '',
     });
 
+   
     const checkArray = this.state.contacts.filter(contact => {
       const filterArray = contact.name.toLowerCase();
       const filterName = this.state.name.toLowerCase();
@@ -62,15 +62,22 @@ class App extends Component {
     } else this.state.contacts.push(object);
   };
   handleSearch = () => {
-    this.props.contacts.filter(contact => {
-      const searchType = this.props.filter.toLowerCase();
+    this.setState({
+      contacts: this.state.contacts,
+      filter: this.state.filter
+    })
+    
+    this.state.contacts.filter(contact => {
+      const searchType = this.state.filter.toLowerCase();
       const contactType = contact.name.toLowerCase();
-
+    
       return contactType.includes(searchType);
+      
     });
   };
-
+  
   render() {
+   
     const { contacts, name, filter, number } = this.state;
 
     return (
@@ -82,6 +89,7 @@ class App extends Component {
           onChange={this.handleInputChange}
         />
         <Filter
+          contacts={contacts}
           filter={filter}
           handleSearch={this.handleSearch}
           handleChange={this.handleInputChange}
@@ -97,9 +105,6 @@ class App extends Component {
   }
 }
 
-App.propTypes = {
-  contacts: propTypes.object,
-  filter: propTypes.string,
-};
+
 
 export default App;

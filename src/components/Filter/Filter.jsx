@@ -3,7 +3,9 @@ import css from '../Filter/filter.module.css';
 import propTypes from 'prop-types';
 
 class Filter extends Component {
-  render() {
+  
+  render() 
+  { 
     return (
       <>
         <label className={css.label}>
@@ -22,7 +24,11 @@ class Filter extends Component {
 }
 
 Filter.propTypes = {
+  id: propTypes.string,
+  name:propTypes.string,
+  number:propTypes.number,
   filter: propTypes.string,
+  contacts:propTypes.array
 };
 
 export default Filter;

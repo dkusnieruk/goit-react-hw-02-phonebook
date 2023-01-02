@@ -3,6 +3,7 @@ import css from '../ContactForm/contactForm.module.css';
 import propTypes from 'prop-types';
 class ContactForm extends Component {
   render() {
+    console.log(this.props);
     return (
       <>
         <form className={css.form} onSubmit={this.props.onSubmit}>
@@ -14,7 +15,7 @@ class ContactForm extends Component {
               name="name"
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-              value={this.props.name}
+              value={this.props.name  || ""}
               onChange={this.props.onChange}
               placeholder="Add contact"
               required
@@ -26,7 +27,7 @@ class ContactForm extends Component {
               className={css.input}
               type="tel"
               name="number"
-              value={this.props.number}
+              value={this.props.number || ""}
               onChange={this.props.onChange}
               placeholder="Add Number"
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
