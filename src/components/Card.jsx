@@ -1,5 +1,6 @@
 import { Component } from "react";
 import css from './ContactList/contactList.module.css'
+import propTypes from 'prop-types'
 class Card extends Component {
     render(){
         console.log(this.props);
@@ -18,4 +19,12 @@ class Card extends Component {
         )
     }
 }
+
+Card.propTypes = {
+    index : propTypes.number,
+    name: propTypes.string,
+    number : propTypes.string,
+}
+
+
 export default Card
