@@ -6,6 +6,7 @@ class ContactList extends Component {
     return (
       <ul className={css.listMain}>
         {
+          
         this.props.contacts
           .filter(contact => {
             const searchType = this.props.filter.toLowerCase();
@@ -26,6 +27,7 @@ class ContactList extends Component {
                   >
                     X
                   </button>
+                  
                 </li>
               );
           })}

@@ -6,7 +6,7 @@ import ContactList from './ContactList/ContactList';
 
 
 class App extends Component {
-  constructor(props) {
+  constructor() {
     super();
     this.state = {
       contacts: [
@@ -24,14 +24,17 @@ class App extends Component {
 
     this.setState({
       contacts: newList,
-    });
+    },
+    this.updateStorage);
+   
   };
 
   handleInputChange = event => {
     const { value, name } = event.target;
     this.setState({
       [name]: value,
-    });
+    }, this.updateStorage);
+   
   };
 
   handleSubmit = event => {
@@ -45,7 +48,7 @@ class App extends Component {
     this.setState({
       name: '',
       number: '',
-    });
+    }, this.updateStorage);
 
    
     const checkArray = this.state.contacts.filter(contact => {
@@ -60,26 +63,34 @@ class App extends Component {
     if (checkArray.length > 0) {
       alert(`Masz już kontakt o imieniu : ${this.state.name}`);
     } else this.state.contacts.push(object);
+            
   };
   handleSearch = () => {
     this.setState({
       contacts: this.state.contacts,
       filter: this.state.filter
     })
-    
-    this.state.contacts.filter(contact => {
-      const searchType = this.state.filter.toLowerCase();
-      const contactType = contact.name.toLowerCase();
-    
-      return contactType.includes(searchType);
-      
-    });
   };
-  
-  render() {
-   
-    const { contacts, name, filter, number } = this.state;
+ 
+  updateStorage() {
+    localStorage.removeItem("state")
+    localStorage.setItem('state', JSON.stringify(this.state))
+    console.log(localStorage);
+  }
 
+  componentDidMount () {
+    const state = localStorage.getItem("state")
+    if (state)
+    this.setState(
+      JSON.parse(state)
+     )
+  }
+  
+
+  render() {
+    
+    const { contacts, name, filter, number} = this.state;
+console.log(this.state);
     return (
       <>
         <ContactForm
@@ -98,7 +109,7 @@ class App extends Component {
           contacts={contacts}
           filter={filter}
           name={name}
-          handleRemove={this.handleRemove}
+          handleRemove={this.handleRemove}          
         />
       </>
     );
