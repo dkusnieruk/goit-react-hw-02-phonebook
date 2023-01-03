@@ -70,6 +70,7 @@ class App extends Component {
       contacts: this.state.contacts,
       filter: this.state.filter
     })
+
   };
  
   updateStorage() {
@@ -104,6 +105,7 @@ console.log(this.state);
           filter={filter}
           handleSearch={this.handleSearch}
           handleChange={this.handleInputChange}
+          
         />
         <ContactList
           contacts={contacts}

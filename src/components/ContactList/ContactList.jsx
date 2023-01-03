@@ -1,10 +1,13 @@
 import { Component } from 'react';
 import css from '../ContactList/contactList.module.css';
 import propTypes from 'prop-types';
+import Card from '../Card'
 class ContactList extends Component {
   render() {
+
     return (
       <ul className={css.listMain}>
+        
         {
           
         this.props.contacts
@@ -17,19 +20,8 @@ class ContactList extends Component {
           .map((contact, index) => {
 
               return (
-                <li className={css.singleItem} key={index}>
-                  {contact.name}: {contact.number}
-                  <button
-                    className={css.removeButton}
-                    type="button"
-                    id={contact.id}
-                    onClick={() => this.props.handleRemove(contact.id)}
-                  >
-                    X
-                  </button>
-                  
-                </li>
-              );
+                                <Card contact={contact} index={index} handleRemove={this.props.handleRemove}  />               
+                              );
           })}
       </ul>
     );
