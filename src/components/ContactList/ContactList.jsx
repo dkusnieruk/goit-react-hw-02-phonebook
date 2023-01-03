@@ -20,7 +20,7 @@ class ContactList extends Component {
           .map((contact, index) => {
 
               return (
-                                <Card contact={contact} index={index} handleRemove={this.props.handleRemove}  />               
+                                <Card contact={contact} index={index} handleRemove={this.props.handleRemove} key={index}  />               
                               );
           })}
       </ul>

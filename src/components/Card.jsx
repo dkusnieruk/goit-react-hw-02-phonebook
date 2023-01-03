@@ -5,7 +5,7 @@ class Card extends Component {
     render(){
         console.log(this.props);
         return(
-            <li className={css.singleItem} key={this.props.index}>
+            <li className={css.singleItem} key={this.props.contact.id}>
             {this.props.contact.name}: {this.props.contact.number}
             <button
               className={css.removeButton}
