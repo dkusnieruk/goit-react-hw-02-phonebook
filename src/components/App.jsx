@@ -4,7 +4,6 @@ import Filter from './Filter/Filter';
 import { nanoid } from 'nanoid';
 import ContactList from './ContactList/ContactList';
 
-
 class App extends Component {
   constructor() {
     super();
@@ -22,35 +21,40 @@ class App extends Component {
   handleRemove = id => {
     const newList = this.state.contacts.filter(item => item.id !== id);
 
-    this.setState({
-      contacts: newList,
-    },
-    this.updateStorage);
-   
+    this.setState(
+      {
+        contacts: newList,
+      },
+      this.updateStorage
+    );
   };
 
   handleInputChange = event => {
     const { value, name } = event.target;
-    this.setState({
-      [name]: value,
-    }, this.updateStorage);
-   
+    this.setState(
+      {
+        [name]: value,
+      },
+      this.updateStorage
+    );
   };
 
   handleSubmit = event => {
     event.preventDefault();
     const object = {
       id: nanoid(),
-      name: event.target.elements.name.value ,
-      number: event.target.elements.number.value ,
+      name: event.target.elements.name.value,
+      number: event.target.elements.number.value,
     };
-   
-    this.setState({
-      name: '',
-      number: '',
-    }, this.updateStorage);
 
-   
+    this.setState(
+      {
+        name: '',
+        number: '',
+      },
+      this.updateStorage
+    );
+
     const checkArray = this.state.contacts.filter(contact => {
       const filterArray = contact.name.toLowerCase();
       const filterName = this.state.name.toLowerCase();
@@ -63,35 +67,26 @@ class App extends Component {
     if (checkArray.length > 0) {
       alert(`Masz już kontakt o imieniu : ${this.state.name}`);
     } else this.state.contacts.push(object);
-            
   };
   handleSearch = () => {
     this.setState({
       contacts: this.state.contacts,
-      filter: this.state.filter
-    })
-
+      filter: this.state.filter,
+    });
   };
- 
+
   updateStorage() {
-    localStorage.removeItem("state")
-    localStorage.setItem('state', JSON.stringify(this.state))
-    console.log(localStorage);
+    localStorage.setItem('state', JSON.stringify(this.state));
   }
 
-  componentDidMount () {
-    const state = localStorage.getItem("state")
-    if (state)
-    this.setState(
-      JSON.parse(state)
-     )
+  componentDidMount() {
+    const state = localStorage.getItem('state');
+    if (state) this.setState(JSON.parse(state));
   }
-  
 
   render() {
-    
-    const { contacts, name, filter, number} = this.state;
-console.log(this.state);
+    const { contacts, name, filter, number } = this.state;
+
     return (
       <>
         <ContactForm
@@ -105,19 +100,16 @@ console.log(this.state);
           filter={filter}
           handleSearch={this.handleSearch}
           handleChange={this.handleInputChange}
-          
         />
         <ContactList
           contacts={contacts}
           filter={filter}
           name={name}
-          handleRemove={this.handleRemove}          
+          handleRemove={this.handleRemove}
         />
       </>
     );
   }
 }
-
-
 
 export default App;

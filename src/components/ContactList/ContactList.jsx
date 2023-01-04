@@ -1,16 +1,12 @@
 import { Component } from 'react';
-import css from '../ContactList/contactList.module.css';
+import css from '../ContactList/contactList.module.css'
 import propTypes from 'prop-types';
-import Card from '../Card'
+import ContactItem from 'components/ContactItem/ContactItem';
 class ContactList extends Component {
   render() {
-
     return (
       <ul className={css.listMain}>
-        
-        {
-          
-        this.props.contacts
+        {this.props.contacts
           .filter(contact => {
             const searchType = this.props.filter.toLowerCase();
             const contactType = contact.name.toLowerCase();
@@ -18,10 +14,14 @@ class ContactList extends Component {
             return contactType.includes(searchType);
           })
           .map((contact, index) => {
-
-              return (
-                                <Card contact={contact} index={index} handleRemove={this.props.handleRemove} key={index}  />               
-                              );
+            return (
+              <ContactItem
+                contact={contact}
+                index={index}
+                handleRemove={this.props.handleRemove}
+                key={index}
+              />
+            );
           })}
       </ul>
     );
@@ -31,7 +31,14 @@ class ContactList extends Component {
 ContactList.propTypes = {
   name: propTypes.string,
   number: propTypes.number,
-  contacts: propTypes.array,
+  contact: propTypes.arrayOf(
+    propTypes.shape({
+      id: propTypes.string,
+      name: propTypes.string,
+      number: propTypes.number,
+    })
+  ),
   filter: propTypes.string,
+  handleRemove: propTypes.func,
 };
 export default ContactList;
