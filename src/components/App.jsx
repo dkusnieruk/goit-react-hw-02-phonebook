@@ -29,15 +29,13 @@ class App extends Component {
     );
   };
 
-  handleInputChange = event => {
-    const { value } = event.target;
-    this.setState(
-      {
-        filter: value,
-      },
-      this.updateStorage
-    );
-  };
+  handleInputChange = (event) =>{
+    const {value} = event.target
+    this.setState({
+      filter:value
+    },
+    this.updateStorage)
+  }
 
   handleSubmit = event => {
     event.preventDefault();
@@ -46,11 +44,10 @@ class App extends Component {
       name: event.target.elements.name.value,
       number: event.target.elements.number.value,
     };
-    console.log(object);
-
+    
     this.setState(
       {
-        filter: '',
+      filter:""  
       },
       this.updateStorage
     );
@@ -67,7 +64,7 @@ class App extends Component {
     if (checkArray.length > 0) {
       alert(`Masz już kontakt o imieniu : ${object.name}`);
     } else this.state.contacts.push(object);
-    event.target.reset();
+      event.target.reset()
   };
   handleSearch = () => {
     this.setState({
@@ -90,7 +87,11 @@ class App extends Component {
 
     return (
       <>
-        <ContactForm name={name} number={number} onSubmit={this.handleSubmit} />
+        <ContactForm
+          name={name}
+          number={number}
+          onSubmit={this.handleSubmit}
+        />
         <Filter
           contacts={contacts}
           filter={filter}
