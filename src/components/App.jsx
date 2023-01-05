@@ -30,10 +30,10 @@ class App extends Component {
   };
 
   handleInputChange = event => {
-    const { value, name } = event.target;
+    const { value } = event.target;
     this.setState(
       {
-        [name]: value,
+        filter: value,
       },
       this.updateStorage
     );
@@ -46,18 +46,18 @@ class App extends Component {
       name: event.target.elements.name.value,
       number: event.target.elements.number.value,
     };
+    console.log(object);
 
     this.setState(
       {
-        name: '',
-        number: '',
+        filter: '',
       },
       this.updateStorage
     );
 
     const checkArray = this.state.contacts.filter(contact => {
       const filterArray = contact.name.toLowerCase();
-      const filterName = this.state.name.toLowerCase();
+      const filterName = object.name.toLowerCase();
 
       if (filterArray.includes(filterName)) {
         return true;
@@ -65,8 +65,9 @@ class App extends Component {
     });
 
     if (checkArray.length > 0) {
-      alert(`Masz już kontakt o imieniu : ${this.state.name}`);
+      alert(`Masz już kontakt o imieniu : ${object.name}`);
     } else this.state.contacts.push(object);
+    event.target.reset();
   };
   handleSearch = () => {
     this.setState({
@@ -89,12 +90,7 @@ class App extends Component {
 
     return (
       <>
-        <ContactForm
-          name={name}
-          number={number}
-          onSubmit={this.handleSubmit}
-          onChange={this.handleInputChange}
-        />
+        <ContactForm name={name} number={number} onSubmit={this.handleSubmit} />
         <Filter
           contacts={contacts}
           filter={filter}

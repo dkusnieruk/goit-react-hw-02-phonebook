@@ -21,10 +21,8 @@ class ContactItem extends Component {
 
 ContactItem.propTypes = {
   index: propTypes.number,
-  name: propTypes.string,
-  number: propTypes.string,
   handleRemove: propTypes.func,
-  contact: propTypes.arrayOf(
+  contacts: propTypes.arrayOf(
     propTypes.shape({
       id: propTypes.string,
       name: propTypes.string,

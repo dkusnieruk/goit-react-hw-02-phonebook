@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import css from '../ContactList/contactList.module.css'
+import css from '../ContactList/contactList.module.css';
 import propTypes from 'prop-types';
 import ContactItem from 'components/ContactItem/ContactItem';
 class ContactList extends Component {
@@ -29,8 +29,6 @@ class ContactList extends Component {
 }
 
 ContactList.propTypes = {
-  name: propTypes.string,
-  number: propTypes.number,
   contact: propTypes.arrayOf(
     propTypes.shape({
       id: propTypes.string,
